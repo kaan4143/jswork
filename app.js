@@ -334,3 +334,71 @@ for (let i = 1; i <= 10; i++) {
 
 //? ÖRNEK: Girilen bir sayinin Asal olup olmadigini yazdiran kodu
 //? for dongulerini kullanarak yaziniz.
+
+const sayi = Number(prompt("Pozitif Bir sayi giriniz:"));
+let asal = true;
+
+if (sayi <= 1) {
+  alert("Sayi 1'den buyuk olmalidir.");
+} else {
+  for (let i = 2; i < sayi; i++) {
+    if (sayi % i === 0) {
+      asal = false;
+      break;
+    }
+  }
+
+  const sonuc = asal === true ? "ASALDIR" : "ASAL DEGILDIR";
+  console.log(`${sayi} ${sonuc}`);
+}
+
+// * ============================================
+// *            DONGULER(LOOPS)- WHILE
+// * ============================================
+
+console.log("****** WHILE *******");
+
+//? ORNEK: Kullanicidan 0-100 arasinda bir not isteyen ve girilen not
+//? 0-100'den farkli ise Kullaciniyi uyararak yeniden 0-100 arasinda
+//? not girmeye zorlayan kodu while dongusu ile yaziniz.
+
+let not = +prompt("Lutfen 0-100 arasinda bir not girniz.");
+
+while (not < 0 || not > 100) {
+  console.log("Not 0-100 arasinda olmalidir");
+  not = prompt("Lutfen 0-100 arasinda bir not giriniz.");
+}
+
+console.log("Giridiginiz Not:", not);
+
+// if (not < 0 || not > 100) {
+//   alert("Not 0-100 arasinda olmalidir");
+// }
+
+// * ============================================
+// *         DONGULER(LOOPS)- DO-WHILE
+// * ============================================
+
+console.log("****** DO-WHILE *******");
+
+console.log("****** DO-WHILE *******");
+
+//? ORNEK: Kullanicidan 0-100 arasinda bir not isteyen ve girilen not
+//? 0-100'den farkli ise Kullaciniyi uyararak yeniden 0-100 arasinda
+//? not girmeye zorlayan kodu do-while dongusu ile yaziniz.
+
+let not1;
+do {
+  not1 = +prompt("Lutfen 0-100 arasinda bir not girniz.");
+  if (not1 < 0 || not1 > 100) {
+    console.log("Not 0-100 arasinda olmaldir.");
+    alert("Not 0-100 arasinda olmaldir.");
+  }
+} while (not1 < 0 || not1 > 100);
+
+console.log("Giridiginiz Not:", not1);
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
