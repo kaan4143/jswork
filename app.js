@@ -1040,7 +1040,7 @@ console.log(arabalar, n);
 const n1 = arabalar.unshift("Audi");
 console.log(arabalar, n1);
 
-//* dizinin 0. indeks elemanini siler ve silenen elemani dondurur
+//* shift dizinin 0. indeks elemanini siler ve silenen elemani dondurur
 const audi = arabalar.shift();
 console.log(arabalar, audi);
 
@@ -1149,9 +1149,7 @@ console.log(combinedArr);
 
 const yasArray = [18, 22, 78, 34, 78, 79, 15];
 const check = yasArray.every((yas) => yas >= 18);
-check
-  ? console.log("Dizideki herkesin yasi 18'den buyuktur")
-  : console.log("Dizide 18 yas alti var");
+check ? console.log("Dizideki herkesin yasi 18'den buyuktur") : console.log("Dizide 18 yas alti var");
 
 //* some()
 //*-----------------------------------------------------------
@@ -1391,18 +1389,13 @@ console.log(range);
 //? Maasi 9000'den az olanlara %10 zam yaparak bu degerleri
 //? yeni diziye saklayalim.
 
-const lessThan9000Increase = salaries
-  .filter((s) => s < 9000)
-  .map((s) => Math.trunc(s * 1.1));
+const lessThan9000Increase = salaries.filter((s) => s < 9000).map((s) => Math.trunc(s * 1.1));
 
 console.log(lessThan9000Increase);
 
-salaries
-  .filter((s) => s < 9000)
-  .map((s) => Math.trunc(s * 1.1))
-  .forEach((s) => console.log(s));
+salaries.filter((s) => s < 9000).map((s) => Math.trunc(s * 1.1)).forEach((s) => console.log(s));
 //* ======================================================
-//*                 REDUCE METHOD
+//*                 REDUCE METHODçı
 //* ======================================================
 
 // const salaries = [5500, 8000, 6500, 9000, 10000, 15000, 25000];
@@ -1652,3 +1645,222 @@ Object.values(people)
 //********************************************************
 //* JSON => Javascript Object Notation
 //********************************************************
+
+const team = [
+  { name: "Josh", surname: "Adams", job: "developer", age: 30 },
+  { name: "Mary", surname: "Bary", job: "tester", age: 22 },
+  { name: "Hazel", surname: "Nut", job: "developer", age: 20 },
+]; //* JSON
+
+console.log(team);
+console.log(team[2]);
+
+//* Ornek1: team dizisindeki job'lari tek tek yazdiriniz.
+team.forEach((person) => console.log(person.job));
+
+//* Ornek2: age'leri bir artirarak yeni bir diziye saklayiniz.
+const ages = team.map((p) => p.age + 1);
+
+//* Ornek3: name ve surname'leri birlestirip buyuk harfe ceviren ve
+//* bunu fullName key'i olarak saklayan, ayni zamanda age degerlerini 5
+//* arttirarak age key'ine saklayan ve olusan diziyi donduren kodu yazınız.
+
+// const teamFullName = team.map((p) => ({
+//   fullName: p.name.toUpperCase() + " " + p.surname.toUpperCase(),
+//   age: p.age + 5,
+// }));
+
+//?Alternativly
+const teamFullName = team.map((p) => {
+  return {
+    fullName: p.name.toUpperCase() + " " + p.surname.toUpperCase(),
+    age: p.age + 5,
+  };
+});
+
+console.log(teamFullName);
+
+//* Ornek4: Yasi(age) 22 'den kucuk esit olan kisilerin adlarini (name) listeyiniz.
+
+team.filter((p) => p.age <= 22).forEach((p) => console.log(p.name));
+
+//* Ornek5: 22 yasindan kucuk ve esit olanlarin isimlerini diziye saklayiniz.
+
+const teamUnder22 = team.filter((x) => x.age <= 22).map((p) => p.name);
+console.log(teamUnder22);
+
+//* Ornek6: ortalama yasi hesaplayiniz.
+const avgAges =
+  team.reduce((sum, person) => (sum += person.age), 0) / team.length;
+console.log(avgAges);
+
+//* ======================================================
+//*  DESTRUCTURING (OBJECT)
+//* ======================================================
+console.log("****** NEW OPERATORS *******");
+
+const car = {
+  name: "BMW",
+  model: 1990,
+  engine: 1.6,
+  colors: ["blue", "purple"],
+};
+
+//* 1.YONTEM (Classical)
+const name1 = car.name;
+const model1 = car["model"];
+
+//* 2.YONTEM: DESTRUCTURING
+
+const { name: carName, colors, model, engine } = car;
+console.log(carName, model, engine, colors);
+
+//* EXAMPLE: NESTED
+const cars = {
+  car1: {
+    name: "BMW",
+    model: 1990,
+    engine: 1.6,
+  },
+  car2: {
+    name: "Mercedes",
+    model: 2022,
+    engine: 2.0,
+  },
+};
+
+const { car1, car2 } = cars;
+console.log(car1);
+
+const { name: c1Name, model: c1Model } = car1;
+const { name: c2Name, model: c2Model } = car2;
+
+console.log(c1Name, c2Name);
+
+//* Example
+const team = [
+  {
+    name: "Josh",
+    surname: "Barry",
+    job: "developer",
+    age: 30,
+  },
+  {
+    name: "Josh",
+    surname: "Barry",
+    job: "tester",
+    age: 45,
+  },
+  {
+    name: "Hazel",
+    surname: "Nut",
+    job: "team lead",
+    age: 40,
+  },
+];
+//* Classical
+team.forEach((p) => {
+  console.log("****************");
+  console.log("Name:", p.name);
+  console.log("Surname:", p.surname);
+  console.log("Job:", p["job"]);
+  console.log("Age:", p.age);
+});
+
+//* DESTRUCTURING
+team.forEach((p) => {
+  const { name, surname, job, age } = p;
+  console.log("****************");
+  console.log("Name:", name);
+  console.log("Surname:", surname);
+  console.log("Job:", job);
+  console.log("Age:", age);
+});
+
+//* functionund dondurdugu obje dogrudan dest. yapilabilir
+const getInfo = () => {
+  return {
+    id: 1,
+    productName: "Iphone",
+    price: 30000,
+  };
+};
+
+console.log(getInfo());
+const { productName, price } = getInfo();
+console.log("Product Name:", productName);
+console.log("Product Price:", price);
+
+//? Fonksyionlarin obje parametreleri dogrudan dest. yapilabilir.
+const calculate = ({ id, price }) => {
+  console.log(price * 1.1);
+};
+
+calculate({ id: 1, price: 3000 });
+
+//* ======================================================
+//*  DESTRUCTURING (ARRAY)
+//* ======================================================
+const names = ["Ahmet", "Mehmet", "İsmet", "Saffet"];
+
+//*Classical
+const mehmet = names[1]; //* indexing
+
+const [p1, p2, , p4] = names;
+console.log(p1, p2, p4);
+
+//*======================================================
+//*  REST (...)
+//* ======================================================
+
+//? REST operatoru kullanici tarafindan girilen degerleri dizi
+//? icerisine konumlandirir. Cesitli kullanim alanlari vardir.
+
+//! 1- Bir dizi veya object'deki bazi degerlerden geri kalanlarini
+//!    ayri dizi yada objelere kopyalanmasini saglayabilir.
+
+//* REST: (Arrays)
+const autos = ["anadol", "reno", "bmw", "mercedes", "ferrari"];
+
+const [anadol, reno, ...restAutos] = autos;
+console.log(anadol, reno);
+console.log(restAutos);
+
+//* REST (Objects)
+const personel = {
+  pName: "john",
+  surname: "smith",
+  job: "developer",
+  age: 30,
+};
+
+const { pName, job, ...ageSurname } = personel;
+
+console.log(ageSurname);
+console.log(pName, job);
+
+//! 2- Bir fonksiyonun argumanlarini diziye cevirmek icin kullanilabilir.
+
+const sum = (x, y) => x + y;
+
+//? hata vermez fakat sadece 2 argumani toplar
+console.log(sum(1, 2, 3, 4, 5, 6));
+
+const sumAll = (...numbers) => {
+  console.log(numbers); //? (4) [1, 2, 3, 4]
+  return numbers.reduce((s, n) => (s += n), 0);
+};
+
+console.log("SUM OF NUMBERS:", sumAll(1, 2, 3, 4, 5, 6));
+
+const showName = (name, surname, ...titles) => {
+  console.log(titles);
+  const summary = `${name} ${surname} is a ${titles.join(" and ")}`;
+  console.log(summary);
+};
+
+showName("Noah", "Adams", "Developer", "Instr", "Professor", "Dad");
+
+//*======================================================
+//*  SPREAD (...)
+//* ======================================================
