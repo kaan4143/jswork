@@ -1409,12 +1409,21 @@ console.log("SUM:", sumOfSalaries);
 //? İlgili programı yazınız.
 
 const sumOfRaisedSalaries = salaries
-  .filter((sal) => sal <= 9000)
-  .map((sal) => Math.trunc(sal * 1.1))
-  .reduce((acc, salary) => acc + salary, 0);
+  .filter((sal) => sal <= 9000).map((sal) => Math.trunc(sal * 1.1)).reduce((acc, salary) => acc + salary, 0);
 
 console.log("Sum Of Raised Salaries:", sumOfRaisedSalaries);
 
+F4168-Murat  [8:51 PM]
+yeni bir dizide saklamasak foreach ile yapılabilir mi
+Matthew - Instructor  [8:55 PM]
+işlem yapıp değiştirilmiş halini kullanmak istiyorsak map lazım
+Matthew - Instructor  [8:55 PM]
+foreach sadece dizide dolaşıp sergileme yapmamızı sağlar
+Matthew - Instructor  [8:56 PM]
+ve foreach başladı mı durmaz
+break
+continue
+yemez
 //* ===================================================
 //*                 (OBJECTS)
 //* ===================================================
@@ -1595,7 +1604,7 @@ console.log("Salary of P2:", people.person2.salary);
 
 //? Objelerin key ve value'larini okumak icin built-in metotlar vardir.
 //? Bu mettotlar aslinda objelerin key ve/veya value'lari bir dizi olarak dondurur.
-console.log(Object.keys(people));
+console.log(Object.keys(people)); 
 console.log(Object.values(people));
 console.log(Object.entries(people));
 
@@ -1638,9 +1647,7 @@ Object.values(people).forEach((p) => console.log(p.surname));
 
 //? job = developer olanlarin dob degelerini yazdiriniz.
 console.log("*** DOB ****");
-Object.values(people)
-  .filter((p) => p.job === "developer")
-  .forEach((p) => console.log(p.dob));
+Object.values(people).filter((p) => p.job === "developer").forEach((p) => console.log(p.dob));
 
 //********************************************************
 //* JSON => Javascript Object Notation
@@ -1864,3 +1871,55 @@ showName("Noah", "Adams", "Developer", "Instr", "Professor", "Dad");
 //*======================================================
 //*  SPREAD (...)
 //* ======================================================
+
+
+//? Spread operatoru ise iterables olan bir elemani bireysel
+//? degerler haline getirir.
+
+//* array concatination
+const flyingVecihles = ["Aircraft", "Helicopter", "QuadCopter"];
+const automobiles = ["Truck", "Bus", "Car", "SUV"];
+// const allVehicles = [flyingVecihles, automobiles];
+const allVehicles = [...flyingVecihles, ...automobiles];
+console.log(allVehicles);
+
+const citrus = ["orange", "lime", "lemon"];
+const fruits = ["apple", ...citrus, "banana", "chery", "pear"];
+console.log(fruits);
+
+//* String spread
+let str = "Hello FS12";
+const charArray = [...str];
+console.log(charArray, str);
+
+charArray[0] = "X";
+console.log(charArray, str);
+
+//* Max() - Dizileri fonksiyonlara acik bir sekilde parametre vermek icin
+console.log(Math.max(1, 3, 5, 2, 10));
+const nums = [1, 3, 5, 2, 10];
+console.log(Math.max(...nums));
+
+//* Array Copy
+const myNumbers = [1, 2, 3];
+const herNumbers = [-1, ...myNumbers, 7];
+const hisNumbers = [...herNumbers];
+hisNumbers.push(101);
+console.log("MY:", myNumbers, "HIS:", hisNumbers);
+
+console.log(herNumbers);
+
+//* Object Copy
+
+const myObj = { a: 1, b: 2, c: 4 };
+const herObj = { a: 2, z: 4, c: 3 };
+
+const copiedObj = { ...myObj };
+console.log(copiedObj);
+
+copiedObj.c = "33";
+console.log(copiedObj, myObj);
+
+const combinedObj = { ...herObj, ...myObj };
+
+console.log(combinedObj);
